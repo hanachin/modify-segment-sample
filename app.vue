@@ -3,10 +3,6 @@
   .segments {
     width: 640px;
   }
-  .segment {
-    border: 1px solid #999;
-    white-space: pre-wrap;
-  }
 </style>
 
 <template>
