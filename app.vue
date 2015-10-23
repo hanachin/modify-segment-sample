@@ -21,7 +21,7 @@
 
   var segments = _.times(30, function (n) {
     var text = _.times(_.random(30, 50), function () {
-      if (_.random(0, 30) > 29) {
+      if (_.random(0, 100) > 99) {
         return String.fromCharCode(0x0A);
       } else {
         return String.fromCharCode(_.random(0x61, 0x7a));
