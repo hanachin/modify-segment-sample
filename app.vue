@@ -6,30 +6,45 @@
 </style>
 
 <template>
-<pre class="segments">
-  <segment v-for="s in segments" :data="s">
+<pre class="chars">
+  <char v-for="c in chars" :data="c">
 </pre>
 </template>
 
 <script>
   var _ = require('underscore');
-  var segmentComponent = require('./segment.vue');
+  var charComponent = require('./char.vue');
   var segments = require('./segments.js')
 
   var segments = segments.generateSampleSegments();
 
+  var chars = _.flatten(_.map(segments, function (s) {
+    return _.map(s.text.split(''), function(c) {
+      return {char: c, id: s.id, selected: false, nextChar: null};
+    });
+  }));
+
+  _.each(chars, function (char, index, chars) {
+    if (chars[index+1]) {
+      char.nextChar = chars[index+1];
+    }
+  })
+
+  var segmentsIds = _.uniq(_.pluck(segments, 'id'));
+
   module.exports = {
     components: {
-      segment: segmentComponent
+      char: charComponent
     },
     data: function () {
       return {
-        segments: segments
+        chars: chars,
+        segmentsIds: segmentsIds
       }
     },
     events: {
-      "segment-selected": function (id) {
-        _.each(this.$get('segments'), function (s) {
+      "char-selected": function (id) {
+        _.each(this.$get('chars'), function (s) {
           s.selected = (s.id == id);
         });
       }
