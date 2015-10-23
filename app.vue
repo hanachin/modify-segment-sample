@@ -20,13 +20,16 @@
 
   var chars = _.flatten(_.map(segments, function (s) {
     return _.map(s.text.split(''), function(c) {
-      return {char: c, id: s.id, selected: false, nextChar: null};
+      return {char: c, id: s.id, selected: false, nextChar: null, prevChar: null};
     });
   }));
 
   _.each(chars, function (char, index, chars) {
     if (chars[index+1]) {
       char.nextChar = chars[index+1];
+    }
+    if (chars[index-1]) {
+      char.prevChar = chars[index+1];
     }
   })
 
