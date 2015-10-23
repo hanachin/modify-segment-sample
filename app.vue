@@ -1,19 +1,54 @@
 // app.vue
 <style>
-  .red {
-    color: #f00;
+  .segments {
+    width: 640px;
+  }
+  .segment {
+    border: 1px solid #999;
+    white-space: pre-wrap;
   }
 </style>
 
 <template>
-  <h1 class="red">{{msg}}</h1>
+<pre class="segments">
+  <segment v-for="s in segments" :data="s">
+</pre>
 </template>
 
 <script>
+  var _ = require('underscore');
+  var segmentComponent = require('./segment.vue');
+
+  var segments = _.times(30, function (n) {
+    var text = _.times(_.random(30, 50), function () {
+      if (_.random(0, 30) > 29) {
+        return String.fromCharCode(0x0A);
+      } else {
+        return String.fromCharCode(_.random(0x61, 0x7a));
+      }
+    }).join('');
+
+    return {
+      text: text,
+      id: n,
+      selected: false
+    };
+  });
+
   module.exports = {
+    components: {
+      segment: segmentComponent
+    },
     data: function () {
       return {
-        msg: 'Hello world!'
+        segments: segments
+      }
+    },
+    events: {
+      "segment-selected": function (id) {
+        _.each(this.$get('segments'), function (s) {
+          s.selected = (s.id == id);
+        });
       }
     }
   }
