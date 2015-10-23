@@ -29,7 +29,7 @@
       char.nextChar = chars[index+1];
     }
     if (chars[index-1]) {
-      char.prevChar = chars[index+1];
+      char.prevChar = chars[index-1];
     }
   })
 
