@@ -7,7 +7,6 @@
     white-space: pre-wrap;
   }
   .char.char--selected {
-    background-color: rgba(158, 158, 158, 0.5);
     text-decoration: underline;
   }
   .char.char--last {
@@ -16,19 +15,26 @@
 </style>
 
 <template>
-<span
+<span v-if="data.selected && !prevChar">👈</span><span
   class="char"
   v-on:click="select"
-  v-bind:class="{'char--selected': data.selected, 'char--last': hasNext}"
+  v-bind:class="{'char--selected': data.selected, 'char--last': !nextChar}"
   v-bind:data-segment-id="data.id"
->{{data.char}}</span>
+>{{data.char}}</span><span v-if="data.selected && !nextChar">👉</span>
 </template>
 
 <script>
   module.exports = {
     computed: {
-      hasNext: function() {
-        return this.data.nextChar && (this.data.id != this.data.nextChar.id);
+      prevChar: function () {
+        if (this.data.prevChar && (this.data.id == this.data.prevChar.id)) {
+          return this.data.prevChar;
+        }
+      },
+      nextChar: function() {
+        if (this.data.nextChar && (this.data.id == this.data.nextChar.id)) {
+          return this.data.nextChar;
+        }
       }
     },
     methods: {
