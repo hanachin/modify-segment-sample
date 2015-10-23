@@ -12,10 +12,14 @@
   .char.char--last {
     border-width: 0px 1px 0px 0px;
   }
+
+  .char, .char__button {
+    -webkit-user-select: none;
+  }
 </style>
 
 <template>
-<span v-if="data.selected && !prevChar">👈</span><span
+<span class="char__button" v-if="data.selected && !prevChar">👈</span><span
   class="char"
   v-on:click="select"
   v-bind:class="{'char--selected': data.selected, 'char--last': !nextChar}"
