@@ -10,5 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "vue": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.21.0",
+    "style-loader": "^0.13.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^4.0.9"
   }
 }
