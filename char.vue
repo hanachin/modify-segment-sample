@@ -2,19 +2,16 @@
 <style>
   .char {
     border-style: solid;
-    border-width: 1px 0px;
+    border-width: 0px 0px;
     border-color: #999;
     white-space: pre-wrap;
   }
-  .char:first-child {
-    border-width: 1px 0px 1px 1px;
-  }
   .char.char--selected {
     background-color: rgba(158, 158, 158, 0.5);
+    text-decoration: underline;
   }
-  .char.char--last,
-  .char:last-child {
-    border-width: 1px 1px 1px 0px;
+  .char.char--last {
+    border-width: 0px 1px 0px 0px;
   }
 </style>
 
