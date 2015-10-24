@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-module.exports.generateSampleSegments = function () {
+module.exports = function () {
   return _.times(30, function (n) {
     var text = _.times(_.random(30, 50), function () {
       if (_.random(0, 100) > 99) {

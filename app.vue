@@ -14,9 +14,9 @@
 <script>
   var _ = require('underscore');
   var charComponent = require('./char.vue');
-  var segments = require('./segments.js')
+  var generateSampleSegments = require('./generateSampleSegments.js')
 
-  var segments = segments.generateSampleSegments();
+  var segments = generateSampleSegments();
 
   var chars = _.flatten(_.map(segments, function (s) {
     return _.map(s.text.split(''), function(c) {
