@@ -10,7 +10,7 @@
 
 <template>
 <pre class="segments">
-  <segment v-for="s in segments" :data="s">
+  <segment v-for="s in segments" :segment="s">
 </pre>
 </template>
 
@@ -36,13 +36,16 @@
     data: function () {
       return {
         segments: segments,
+        selectedSegment: null
       }
     },
     events: {
-      "segment-selected": function (id) {
-        _.each(this.$get('segments'), function (s) {
-          s.selected = (s.id == id);
-        });
+      "segment-selected": function (segmentView) {
+        if (this.$get('selectedSegment')) {
+          this.$get('selectedSegment').$set('selected', false);
+        }
+        this.$set('selectedSegment', segmentView)
+        segmentView.$set('selected', true);
       }
     }
   }
