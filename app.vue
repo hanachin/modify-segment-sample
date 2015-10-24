@@ -2,52 +2,45 @@
 <style>
   .segments {
     width: 640px;
+    height: 100%;
+    border: 1px solid #EEE;
+    overflow: scroll;
   }
 </style>
 
 <template>
-<pre class="chars">
-  <char v-for="c in chars" :data="c">
+<pre class="segments">
+  <segment v-for="s in segments" :data="s">
 </pre>
 </template>
 
 <script>
   var _ = require('underscore');
-  var charComponent = require('./char.vue');
+  var segmentComponent = require('./segment.vue');
   var generateSampleSegments = require('./generateSampleSegments.js')
 
   var segments = generateSampleSegments();
 
-  var chars = _.flatten(_.map(segments, function (s) {
-    return _.map(s.text.split(''), function(c) {
-      return {char: c, id: s.id, selected: false, nextChar: null, prevChar: null};
-    });
-  }));
-
-  _.each(chars, function (char, index, chars) {
-    if (chars[index+1]) {
-      char.nextChar = chars[index+1];
-    }
-    if (chars[index-1]) {
-      char.prevChar = chars[index-1];
-    }
-  })
-
-  var segmentsIds = _.uniq(_.pluck(segments, 'id'));
+  segments = _.map(segments, function (s) {
+    return {
+      text: s.text,
+      id: s.id,
+      selected: false
+    };
+  });
 
   module.exports = {
     components: {
-      char: charComponent
+      segment: segmentComponent
     },
     data: function () {
       return {
-        chars: chars,
-        segmentsIds: segmentsIds
+        segments: segments,
       }
     },
     events: {
-      "char-selected": function (id) {
-        _.each(this.$get('chars'), function (s) {
+      "segment-selected": function (id) {
+        _.each(this.$get('segments'), function (s) {
           s.selected = (s.id == id);
         });
       }
