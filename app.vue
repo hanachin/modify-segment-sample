@@ -9,6 +9,7 @@
 </style>
 
 <template>
+クリックして選択、←で左に伸ばす→で右に伸ばす、↑ or kで前の部分に移動、↓ or jで次の部分に移動。
 <pre
   class="segments"
   @keydown.left.prevent="expandLeft"
