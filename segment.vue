@@ -24,8 +24,8 @@
 <template>
 <span
   class="segment"
-  v-on:click="select"
-  v-bind:class="{'segment--selected': selected}"
+  @click="select"
+  v-bind:class="{'segment--selected': segment.selected}"
 >{{segment.text}}</span>
 </template>
 
@@ -33,11 +33,8 @@
   module.exports = {
     methods: {
       select: function() {
-        this.$dispatch('segment-selected', this);
+        this.$dispatch('segment-selected', this.segment);
       }
-    },
-    data: function() {
-      return {selected: false};
     },
     props: ['segment']
   }
