@@ -45,6 +45,7 @@
   });
 
   module.exports = {
+    el: '#app',
     components: {
       segment: segmentComponent
     },
